@@ -51,7 +51,7 @@ def download():
     quality = data['quality']
     url = data['link']
 
-    safe_title = title.replace('/', '_').replace('\', '_')
+    safe_title = title.replace('/', '_').replace('\\', '_')
     filename = os.path.join(DOWNLOAD_FOLDER, f"{safe_title} {quality}.mp4")
 
     def _download_thread():
