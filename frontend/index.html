@@ -1,0 +1,41 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Movie Downloader</title>
+</head>
+<body>
+    <h1>Movie Downloader</h1>
+    <input type="text" id="searchBox" placeholder="Enter movie title">
+    <button onclick="search()">Search</button>
+    <ul id="results"></ul>
+
+    <script>
+        function search() {
+            const movie = document.getElementById("searchBox").value;
+            fetch(`https://your-backend-url.onrender.com/search?movie=${encodeURIComponent(movie)}`)
+                .then(res => res.json())
+                .then(data => {
+                    const resultsList = document.getElementById("results");
+                    resultsList.innerHTML = '';
+                    data.forEach(movie => {
+                        const li = document.createElement("li");
+                        li.innerHTML = `${movie.title} (${movie.year}) [${movie.quality}] 
+                            <button onclick='download(${JSON.stringify(movie)})'>Download</button>`;
+                        resultsList.appendChild(li);
+                    });
+                });
+        }
+
+        function download(movie) {
+            fetch('https://your-backend-url.onrender.com/download', {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify(movie)
+            }).then(res => res.json()).then(data => {
+                alert(data.message);
+            });
+        }
+    </script>
+</body>
+</html>
