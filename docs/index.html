@@ -13,7 +13,7 @@
     <script>
         function search() {
             const movie = document.getElementById("searchBox").value;
-            fetch(`https://your-backend-url.onrender.com/search?movie=${encodeURIComponent(movie)}`)
+            fetch(`https://sdb-zyiu.onrender.com/search?movie=${encodeURIComponent(movie)}`)
                 .then(res => res.json())
                 .then(data => {
                     const resultsList = document.getElementById("results");
@@ -28,7 +28,7 @@
         }
 
         function download(movie) {
-            fetch('https://your-backend-url.onrender.com/download', {
+            fetch('https://sdb-zyiu.onrender.com/download', {
                 method: 'POST',
                 headers: {'Content-Type': 'application/json'},
                 body: JSON.stringify(movie)
